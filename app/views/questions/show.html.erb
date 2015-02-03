@@ -4,3 +4,10 @@
   <h3><%= answer.title %></h3>
   <p><%= answer.content %></p>
 <% end %>
+
+<%= form_for :answer do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :content %>
+
+  <%= f.submit  %>
+<% end %>
