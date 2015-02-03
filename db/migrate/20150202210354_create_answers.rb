@@ -4,6 +4,8 @@ class CreateAnswers < ActiveRecord::Migration
       t.string :title
       t.text :content
 
+      t.belongs_to :question
+
       t.timestamps
     end
   end
