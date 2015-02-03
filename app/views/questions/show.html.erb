@@ -1,13 +1,29 @@
-<h1> <%= @question.title %> </h1>
-<h2> <%= @question.content %> </h2>
+<h1>Question Title: <%= @question.title %> </h1>
+<h2>Question Content: <%= @question.content %> </h2>
+
 <% @question.answers.each do |answer| %>
-  <h3><%= answer.title %></h3>
-  <p><%= answer.content %></p>
+  <h3>Answer Title: <%= answer.title %></h3>
+  <p>Answer Content: <%= answer.content %></p>
 <% end %>
+
+<%= link_to 'Destroy', question_path(@question),
+            method: :delete,
+            data: { confirm: "Are you sure?" }  %>
+
+<!-- ??How is @question working?? -->
+<%= link_to 'Edit', edit_question_path(@question) %>
+
+<br><br><br><br>
 
 <%= form_for :answer do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_area :content %>
-
-  <%= f.submit  %>
+  <table>
+    <tr>
+      <td><%= f.label :answer %></td>
+      <td><%= f.text_field :title %></td>
+      <td><%= f.label :content %></td>
+      <td>Content:<%= f.text_area :content %></td>
+      <td><%= f.submit %> </td>
+    </tr>
+  </table>
 <% end %>
+

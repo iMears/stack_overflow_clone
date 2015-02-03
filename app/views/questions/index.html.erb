@@ -1,11 +1,14 @@
 <% @questions.each do |question| %>
-  <h1> <%= question %> </h1>
-  <h1> <%= question.title %> </h1>
-  <h2> <%= question.content %> </h2>
+  <h1>Question Title:<%= question.title %></h1>
+  <h4>Question Object:<%= question %></h4>
+  <h2>Question Content:<%= question.content %></h2>
+  <br><br>
 <% end %>
 
 <%= form_for :question do |f| %>
+  <%= f.label :title %>
   <%= f.text_field :title %>
+  <%= f.label :content %>
   <%= f.text_area :content %>
   <%= f.submit %>
 <% end %>
