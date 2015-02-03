@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
 
   def destroy
     p "Made it in the destroy route"
-    @question = Question.find(question_params)
+    @question = Question.find(params[:id])
     @question.destroy
     redirect_to questions_path
   end
