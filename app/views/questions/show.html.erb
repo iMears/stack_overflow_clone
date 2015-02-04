@@ -4,6 +4,9 @@
 <% @question.answers.each do |answer| %>
   <h3>Answer Title: <%= answer.title %></h3>
   <p>Answer Content: <%= answer.content %></p>
+  <%= button_to "Upvote", question_answer_upvotes_path(answer.question,answer) %>
+  <!-- button_to "Downvote", question_answer_downvotes_path(answer) -->
+  Votes: <%= answer.votes %>
 <% end %>
 
 <%= link_to 'Destroy', question_path(@question),
@@ -14,8 +17,9 @@
 <%= link_to 'Edit', edit_question_path(@question) %>
 
 <br><br><br><br>
-@question.answers.build
-<%= form_for([@question, ]) do |f| %>
+
+<!-- Form for adding answer: -->
+<%= form_for([@question, @question.answers.build ]) do |f| %>
   <table>
     <tr>
       <td><%= f.text_field :title, placeholder: "Answer" %></td>

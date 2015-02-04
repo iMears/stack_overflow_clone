@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   resources :questions do
     post "upvotes", to: "questions#upvote"
     post "downvotes", to: "questions#downvote"
-    resources :answers
+    resources :answers do
+      post "upvotes", to: "answers#upvote"
+      post "downvotes", to: "answer#downvote"
+    end
   end
 
   root 'questions#index'
