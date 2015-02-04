@@ -32,7 +32,7 @@ gem 'shoulda-matchers'
 gem 'factory_girl_rails'
 gem 'httparty'
 gem 'dotenv-rails'
-
+gem 'jquery-turbolinks'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
