@@ -3,6 +3,7 @@
   <h4>Question Object:<%= question %></h4>
   <h2>Question Content:<%= question.content %></h2>
   <%= button_to "Upvote", question_upvotes_path(question)%>
+
   <%= button_to "Downvote", question_downvotes_path(question)%>
   Votes: <%= question.votes %>
   <br><br>

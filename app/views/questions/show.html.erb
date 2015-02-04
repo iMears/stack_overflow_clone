@@ -5,7 +5,7 @@
   <h3>Answer Title: <%= answer.title %></h3>
   <p>Answer Content: <%= answer.content %></p>
   <%= button_to "Upvote", question_answer_upvotes_path(answer.question,answer) %>
-  <!-- button_to "Downvote", question_answer_downvotes_path(answer) -->
+   <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer) %>
   Votes: <%= answer.votes %>
 <% end %>
 

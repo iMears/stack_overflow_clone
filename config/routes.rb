@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     post "downvotes", to: "questions#downvote"
     resources :answers do
       post "upvotes", to: "answers#upvote"
-      post "downvotes", to: "answer#downvote"
+      post "downvotes", to: "answers#downvote"
     end
   end
 

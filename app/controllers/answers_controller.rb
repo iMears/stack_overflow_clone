@@ -11,17 +11,15 @@ class AnswersController < ApplicationController
 
     @question = @answer.question
     render "./questions/show"
-    # redirect_to questions_path
   end
 
-  # def downvote
-  #   @answer = Answer.find(params[:question_id])
-  #   @answer.decrement!(:votes)
+  def downvote
+    @answer = Answer.find(params[:answer_id])
+    @answer.decrement!(:votes)
 
-  #   redirect_to questions_path
-  # end
-
-
+    @question = @answer.question
+    render "./questions/show"
+  end
 
   def create
     @answer = Answer.new(title: answer_params[:answer][:title],
