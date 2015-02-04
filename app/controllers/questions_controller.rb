@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+
   before_action :get_question, except: [:index, :create, :upvote, :downvote]
 
   def get_question
@@ -20,6 +21,11 @@ class QuestionsController < ApplicationController
   end
 
   def index
+    # GITHUB_TOKEN = ENV['GITHUB_TOKEN']
+    # GITHUB_USER =
+    @api_response = HTTParty.get("https://api.github.com/zen",
+            :headers => { "Authorization" => 'token ' + ENV['GITHUB_TOKEN'], 'User-Agent' => 'xyz'})
+    # @github_user = JSON.parse(@api_response.body);
     @questions = Question.all.order(:created_at)
   end
 
