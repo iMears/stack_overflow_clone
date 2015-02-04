@@ -6,7 +6,9 @@ class AnswersController < ApplicationController
   # end
 
   def create
-    @answer = Answer.new(title: answer_params[:answer][:title], question_id: answer_params[:question_id], content: answer_params[:answer][:content])
+    @answer = Answer.new(title: answer_params[:answer][:title],
+                         question_id: answer_params[:question_id],
+                         content: answer_params[:answer][:content])
 
     @answer.save
     redirect_to @answer.question  #Still weird

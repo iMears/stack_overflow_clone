@@ -2,14 +2,18 @@
   <h1>Question Title:<%= question.title %></h1>
   <h4>Question Object:<%= question %></h4>
   <h2>Question Content:<%= question.content %></h2>
+  <%= button_to "Upvote", question_upvotes_path(question)%>  <!-- ??METHOD?? -->
   <br><br>
 <% end %>
+
 <table> <!-- FIGURE OUT FORMATING PROBLEM -->
-<%= form_for :question do |f| %>
- <tr><%= f.label :"Question:" %></tr>
-  <tr><%= f.text_field :title %></tr>
-  <tr><%= f.label :"Content:" %></tr>
-  <tr><%= f.text_area :content %></tr>
-  <tr><%= f.submit "Submt" , class: "btn btn-success" %>
-<% end %>
+  <%= form_for :question do |f| %>
+   <tr><%= f.label :"Question:" %></tr>
+    <tr><%= f.text_field :title %></tr>
+    <tr><%= f.label :"Content:" %></tr>
+    <tr><%= f.text_area :content %></tr>
+    <tr><%= f.submit "Submt" , class: "btn btn-success" %>
+  <% end %>
 </table>
+
+

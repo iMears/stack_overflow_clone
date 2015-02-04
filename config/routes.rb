@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :questions do
+    post "upvotes", to: "questions#upvote"
     resources :answers
   end
 

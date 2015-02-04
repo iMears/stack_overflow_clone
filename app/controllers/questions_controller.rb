@@ -6,6 +6,12 @@ class QuestionsController < ApplicationController
   # def find_question
   #   @question = Question.find(params[:id])
   # end
+  def upvote
+    @question = Question.find(params[:question_id])
+    @question.increment!(:votes)
+
+    redirect_to @question
+  end
 
   def index
     @questions = Question.all
@@ -46,6 +52,8 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
+    p "-"* 80
+    p params
     params.require(:question).permit(:title, :content, :id, :votes)
   end
 end
