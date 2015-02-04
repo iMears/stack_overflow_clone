@@ -1,3 +1,17 @@
+# GET index (lists all the things)
+# GET show (shows one thing)
+#
+# Changing:
+# GET edit (shows the form to edit a thing)
+# PUT or PATCH update (actually changes the thing)
+#
+# Creating:
+# GET new (shows the form to create a thing)
+# POST create (actually creates the thing)
+#
+# Deleting
+# DELETE destroy
+
 Rails.application.routes.draw do
   resources :questions do
     post "upvotes", to: "questions#upvote"
