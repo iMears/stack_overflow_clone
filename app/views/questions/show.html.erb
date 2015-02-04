@@ -1,33 +1,27 @@
 <h3><%= @question.title %> </h3>
-<p><%= @question.content %> </p>
+<h4><%= @question.content %> </h4>
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Delete', question_path(@question),
+            method: :delete,
+            data: { confirm: "Delete question?" }  %>
 <br><br>
-<h4>Answers:</h4>
-<br>
 <% @question.answers.each do |answer| %>
-  <h4><%= answer.title %></h4>
+  <h5><%= answer.title %></h5>
   <p><%= answer.content %></p>
   <%= button_to "Upvote", question_answer_upvotes_path(answer.question,answer), {:class => "btn btn-success btn-xs" }%>
    <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer), {:class => "btn btn-danger btn-xs" } %>
   Votes: <%= answer.votes %>
 <% end %>
 
-<%= link_to 'Destroy', question_path(@question),
-            method: :delete,
-            data: { confirm: "Are you sure?" }  %>
-
-<!-- ??How is @question working?? -->
-<%= link_to 'Edit', edit_question_path(@question) %>
 
 <br><br><br><br>
 
 <!-- Form for adding answer: -->
 <%= form_for([@question, @question.answers.build ]) do |f| %>
   <table>
-    <tr>
-      <td><%= f.text_field :title, placeholder: "Answer" %></td>
-      <td><%= f.text_area :content, placeholder: "Content"  %></td>
-      <td><%= f.submit "Save Changes", class: "btn btn-default" %> </td>
-    </tr>
+      <tr><%= f.text_field :title, placeholder: "Title", class: "form-control"  %></tr>
+      <tr><%= f.text_area :content, placeholder: "Enter Answer...", class: "form-control"   %></tr>
+      <tr><%= f.submit "Add Answer", class: "btn btn-primary" %> </tr>
   </table>
 <% end %>
 
