@@ -1,11 +1,13 @@
-<h1>Question Title: <%= @question.title %> </h1>
-<h2>Question Content: <%= @question.content %> </h2>
-
+<h3><%= @question.title %> </h3>
+<p><%= @question.content %> </p>
+<br><br>
+<h4>Answers:</h4>
+<br>
 <% @question.answers.each do |answer| %>
-  <h3>Answer Title: <%= answer.title %></h3>
-  <p>Answer Content: <%= answer.content %></p>
-  <%= button_to "Upvote", question_answer_upvotes_path(answer.question,answer) %>
-   <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer) %>
+  <h4><%= answer.title %></h4>
+  <p><%= answer.content %></p>
+  <%= button_to "Upvote", question_answer_upvotes_path(answer.question,answer), {:class => "btn btn-success btn-xs" }%>
+   <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer), {:class => "btn btn-danger btn-xs" } %>
   Votes: <%= answer.votes %>
 <% end %>
 
@@ -24,7 +26,7 @@
     <tr>
       <td><%= f.text_field :title, placeholder: "Answer" %></td>
       <td><%= f.text_area :content, placeholder: "Content"  %></td>
-      <td><%= f.submit "Save Changes", class: "btn btn-success" %> </td>
+      <td><%= f.submit "Save Changes", class: "btn btn-default" %> </td>
     </tr>
   </table>
 <% end %>

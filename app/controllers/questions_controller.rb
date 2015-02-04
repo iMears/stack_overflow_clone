@@ -1,11 +1,10 @@
 class QuestionsController < ApplicationController
-  # before do
-  #   :find_question
-  # end
+  before_action :get_question, except: [:index, :create, :upvote, :downvote]
 
-  # def find_question
-  #   @question = Question.find(params[:id])
-  # end
+  def get_question
+    @question = Question.find(params[:id])
+  end
+
   def upvote
     @question = Question.find(params[:question_id])
     @question.increment!(:votes)
@@ -21,7 +20,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.all.order(:created_at)
   end
 
   def create
@@ -32,15 +31,15 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    # @question = Question.find(params[:id])
   end
 
   def edit
-    @question = Question.find(params[:id])
+    # @question = Question.find(params[:id])
   end
 
   def update
-    @question = Question.find(params[:id])
+    # @question = Question.find(params[:id])
 
     if @question.update(question_params)
       redirect_to @question
@@ -50,8 +49,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    p "Made it in the destroy route"
-    @question = Question.find(params[:id])
+    # @question = Question.find(params[:id])
     @question.destroy
     redirect_to questions_path
   end
@@ -59,8 +57,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    p "-"* 80
-    p params
     params.require(:question).permit(:title, :content, :id, :votes)
   end
 end
