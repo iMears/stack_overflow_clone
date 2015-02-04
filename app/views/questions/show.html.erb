@@ -15,14 +15,12 @@
 
 <br><br><br><br>
 
-<%= form_for :answer do |f| %>
+<%= form_for([@question, @question.answers.build ]) do |f| %>
   <table>
     <tr>
-      <td><%= f.label :answer %></td>
-      <td><%= f.text_field :title %></td>
-      <td><%= f.label :content %></td>
-      <td><%= f.text_area :content %></td>
-      <td><%= f.submit %> </td>
+      <td><%= f.text_field :title, placeholder: "Answer" %></td>
+      <td><%= f.text_area :content, placeholder: "Content"  %></td>
+      <td><%= f.submit "Save Changes", class: "btn btn-success" %> </td>
     </tr>
   </table>
 <% end %>
