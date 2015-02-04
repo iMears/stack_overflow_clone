@@ -21,32 +21,25 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    # GITHUB_TOKEN = ENV['GITHUB_TOKEN']
-    # GITHUB_USER =
     @api_response = HTTParty.get("https://api.github.com/zen",
             :headers => { "Authorization" => 'token ' + ENV['GITHUB_TOKEN'], 'User-Agent' => 'xyz'})
-    # @github_user = JSON.parse(@api_response.body);
     @questions = Question.all.order(:created_at)
   end
 
   def create
     @question = Question.new(question_params)
-
     @question.save
-    redirect_to @question
+    render json: @question
+    # redirect_to @question
   end
 
   def show
-    # @question = Question.find(params[:id])
   end
 
   def edit
-    # @question = Question.find(params[:id])
   end
 
   def update
-    # @question = Question.find(params[:id])
-
     if @question.update(question_params)
       redirect_to @question
     else
@@ -55,7 +48,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    # @question = Question.find(params[:id])
     @question.destroy
     redirect_to questions_path
   end
