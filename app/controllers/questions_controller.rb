@@ -10,14 +10,14 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:question_id])
     @question.increment!(:votes)
 
-    redirect_to @question
+    redirect_to questions_path
   end
 
   def downvote
     @question = Question.find(params[:question_id])
     @question.decrement!(:votes)
 
-    redirect_to @question
+    redirect_to questions_path
   end
 
   def index
