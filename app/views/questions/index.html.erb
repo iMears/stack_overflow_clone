@@ -1,5 +1,20 @@
 <% @questions.each do |question| %>
-  <h1> <%= question %> </h1>
-  <h1> <%= question.title %> </h1>
-  <h2> <%= question.content %> </h2>
+  <h1>Question Title:<%= question.title %></h1>
+  <h4>Question Object:<%= question %></h4>
+  <h2>Question Content:<%= question.content %></h2>
+  <%= button_to "Upvote", question_upvotes_path(question)%>
+
+  <%= button_to "Downvote", question_downvotes_path(question)%>
+  Votes: <%= question.votes %>
+  <br><br>
 <% end %>
+
+<table> <!-- FIGURE OUT FORMATING PROBLEM -->
+  <%= form_for :question do |f| %>
+   <tr><%= f.label :"Question:" %></tr>
+    <tr><%= f.text_field :title %></tr>
+    <tr><%= f.label :"Content:" %></tr>
+    <tr><%= f.text_area :content %></tr>
+    <tr><%= f.submit "Submt" , class: "btn btn-success" %>
+  <% end %>
+</table>
