@@ -13,6 +13,13 @@ class QuestionsController < ApplicationController
     redirect_to @question
   end
 
+  def downvote
+    @question = Question.find(params[:question_id])
+    @question.decrement!(:votes)
+
+    redirect_to @question
+  end
+
   def index
     @questions = Question.all
   end

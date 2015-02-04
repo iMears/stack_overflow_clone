@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :questions do
     post "upvotes", to: "questions#upvote"
+    post "downvotes", to: "questions#downvote"
     resources :answers
   end
 
