@@ -10,11 +10,18 @@
   <% end %>
 </div>
 
-<div class="append-question">
-  <h3>insert title here</h3>
-  <p>insert content here</p>
-  <div class="vote-buttons">
-  </div>
+<div class="append-question" style="display:none">
+
+  <h3><a href="/questions/{{question_id}}"> {{title}} </a> </h3>
+  <p>{{content}}</p>
+
+  <form action="/questions/{{question_id}}/upvotes" method='POST'>
+  </form>
+  <button class="btn btn-success btn-xs vote-btn" type='submit' value='Up Vote'>Up Vote</button>
+
+  <form action="/questions/{{question_id}}/downvotes" method='POST'>
+  </form>
+  <button class="btn btn-danger btn-xs vote-btn" type='submit' value='Down Vote'>Down Vote</button>
 </div>
 
 <div class="form-group">
