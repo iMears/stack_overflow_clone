@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+
   before_action :get_question, except: [:index, :create, :upvote, :downvote]
 
   def get_question
@@ -20,27 +21,25 @@ class QuestionsController < ApplicationController
   end
 
   def index
+    @api_response = HTTParty.get("https://api.github.com/zen",
+            :headers => { "Authorization" => 'token ' + ENV['GITHUB_TOKEN'], 'User-Agent' => 'xyz'})
     @questions = Question.all.order(:created_at)
   end
 
   def create
     @question = Question.new(question_params)
-
     @question.save
-    redirect_to @question
+    render json: @question
+    # redirect_to @question
   end
 
   def show
-    # @question = Question.find(params[:id])
   end
 
   def edit
-    # @question = Question.find(params[:id])
   end
 
   def update
-    # @question = Question.find(params[:id])
-
     if @question.update(question_params)
       redirect_to @question
     else
@@ -49,7 +48,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    # @question = Question.find(params[:id])
     @question.destroy
     redirect_to questions_path
   end

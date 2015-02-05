@@ -24,26 +24,17 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)
-
-    # @answer = Answer.new(title: answer_params[:answer][:title],
-    #                      question_id: answer_params[:question_id],
-    #                      content: answer_params[:answer][:content])
-
-    # @answer.save
-    redirect_to @answer.question  #Still weird
+    render json: @answer
+    # redirect_to @answer.question  #Still weird
   end
 
   def show
-    # @answer = Answer.find(params[:id])
   end
 
   def edit
-    # @answer = Answer.find(params[:id])
   end
 
   def update
-    # @answer = Answer.find(params[:id])
-
     if @answer.update(answer_params)
       redirect_to @question
     else
@@ -52,7 +43,6 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    # @answer = Answer.find(params[:id])
     @answer.destroy
     redirect_to root_path
   end
