@@ -60,7 +60,8 @@ function insertQuestion(event) {
     data: form_input,
     success: function(response) {
       $(".question-list").append(
-          buildQuestion(response)
+          // var parsedContent = parseContent(response);
+          buildQuestion(response, parseContent(response))
         )
     },
     error: function(response) {
@@ -69,11 +70,11 @@ function insertQuestion(event) {
   });
 }
 
-function buildQuestion(question_obj) {
+function buildQuestion(question_obj, parsedContent) {
   var template = $(".append-question").html();
   var newQuestTemplate = Handlebars.compile(template);
-  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": question_obj.title, "content": question_obj.content, "votes": question_obj.votes});
-  return $(resultHTML)
+  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": parsedContent[0], "content": question_obj.content, "votes": question_obj.votes});
+  return $(resultHTML);
 }
 
 //---------------------------Insert Answer-------------------------
@@ -103,3 +104,23 @@ function buildAnswer(answer_obj) {
   var resultHTML = newAnswerTemplate({"question_id": answer_obj.question_id, "answer_id": answer_obj.id, "title": answer_obj.title, "content": answer_obj.content});
   return $(resultHTML)
 }
+
+//---------------------------Parse Content-------------------------
+function parseContent(contentObject) {
+  var title = contentObject.title;
+  console.log(title)
+  // var content = contentObject.content;
+  // console.log(content)
+
+  //Grab the word with astericks
+  var italString = title.match(/\*[a-z]+\*/);
+  var newTitle = "<strong>" + italString.substring(1,italString.length-1) + "</strong>";
+
+  //remove astericks from string
+  //prepend an open italicize tag to the beginning of the string
+  //append a closing italicize tag to the beginning of the string
+  return [newTitle]
+}
+
+
+
