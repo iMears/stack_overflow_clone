@@ -7,11 +7,31 @@ function bindEvents() {
   $('#new-answer-form').on("submit", insertAnswer);
 
   $('.question-list').on("click", ".upvote", incrementVote);
+  $('.question-list').on("click", ".downvote", decrementVote);
 }
 
 //--------------------------Increment Vote--------------------------
 
 function incrementVote(event) {
+  event.preventDefault();
+  var listItem = event.target;
+  var id = $(listItem).attr("id");
+  var form_input = $(this).serialize();
+  $.ajax( {
+    url: this.parentElement.action,
+    type: 'POST',
+    success: function(response) {
+      $("p[id="+response.id+"]").text("votes: " + response.votes);
+    },
+    error: function(response) {
+      console.log(response)
+    }
+  });
+}
+
+//--------------------------Decrement Vote--------------------------
+
+function decrementVote(event) {
   event.preventDefault();
   var listItem = event.target;
   var id = $(listItem).attr("id");
@@ -78,7 +98,6 @@ function insertAnswer(event) {
 }
 
 function buildAnswer(answer_obj) {
-  console.log(answer_obj)
   var template = $(".append-answer").html();
   var newAnswerTemplate = Handlebars.compile(template);
   var resultHTML = newAnswerTemplate({"question_id": answer_obj.question_id, "answer_id": answer_obj.id, "title": answer_obj.title, "content": answer_obj.content});

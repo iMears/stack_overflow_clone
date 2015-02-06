@@ -15,8 +15,7 @@ class QuestionsController < ApplicationController
   def downvote
     @question = Question.find(params[:question_id])
     @question.decrement!(:votes)
-
-    redirect_to questions_path
+    render json: @question
   end
 
   def index
