@@ -30,7 +30,6 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.save
     render json: @question
-    # redirect_to @question
   end
 
   def show

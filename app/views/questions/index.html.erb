@@ -1,7 +1,6 @@
 <div class="question-list">
   <% @questions.each do |question| %>
     <h3><%= link_to question.title, question_path(question) %></h3>
-    <!-- <h4>Question Object:<%= question %></h4> -->
     <p><%= question.content %></p>
     <%= button_to "Up Vote", question_upvotes_path(question), {:class => "btn btn-success btn-xs vote-btn" }%>
     <%= button_to "Down Vote", question_downvotes_path(question), {:class => "btn btn-danger btn-xs vote-btn" }%>
@@ -10,9 +9,9 @@
   <% end %>
 </div>
 
+<!-- Question form template for handlebars -->
 <div class="append-question" style="display:none">
-
-  <h3><a href="/questions/{{question_id}}"> {{title}} </a> </h3>
+  <h3> <a href="/questions/{{question_id}}"> {{title}} </a> </h3>
   <p>{{content}}</p>
 
   <form action="/questions/{{question_id}}/upvotes" method='POST'>

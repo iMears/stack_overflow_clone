@@ -25,7 +25,6 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(answer_params)
     render json: @answer
-    # redirect_to @answer.question  #Still weird
   end
 
   def show
