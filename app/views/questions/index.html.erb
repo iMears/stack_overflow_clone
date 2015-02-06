@@ -11,16 +11,18 @@
 
 <!-- Question form template for handlebars -->
 <div class="append-question" style="display:none">
-  <h3> <a href="/questions/{{question_id}}"> {{title}} </a> </h3>
+  <h3><a href="/questions/{{question_id}}">{{title}}</a></h3>
   <p>{{content}}</p>
 
-  <form action="/questions/{{question_id}}/upvotes" method='POST'>
+  <form id="up-{{question_id}}" action="/questions/{{question_id}}/upvotes" method='POST'>
+    <button class="btn btn-success btn-xs upvote" type='submit' value='Up Vote'>Up Vote</button>
   </form>
-  <button class="btn btn-success btn-xs vote-btn" type='submit' value='Up Vote'>Up Vote</button>
 
-  <form action="/questions/{{question_id}}/downvotes" method='POST'>
+  <form id="down-{{question_id}}" action="/questions/{{question_id}}/downvotes" method='POST'>
   </form>
-  <button class="btn btn-danger btn-xs vote-btn" type='submit' value='Down Vote'>Down Vote</button>
+    <button class="btn btn-danger btn-xs downvote" type='submit' value='Down Vote'>Down Vote</button>
+
+  <p id="{{question_id}}">votes: {{votes}}</p>
 </div>
 
 <div class="form-group">

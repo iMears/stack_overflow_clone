@@ -9,8 +9,7 @@ class QuestionsController < ApplicationController
   def upvote
     @question = Question.find(params[:question_id])
     @question.increment!(:votes)
-
-    redirect_to questions_path
+    render json: @question
   end
 
   def downvote

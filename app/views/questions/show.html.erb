@@ -10,6 +10,7 @@
     <h5><%= answer.title %></h5>
     <p><%= answer.content %></p>
     <%= button_to "Upvote", question_answer_upvotes_path(answer.question, answer), {:class => "btn btn-success btn-xs" }%>
+
      <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer), {:class => "btn btn-danger btn-xs" } %>
     Votes: <%= answer.votes %>
   <% end %>
@@ -30,7 +31,7 @@
 <div class="append-answer" style="display:none">
   <h3>{{title}}</h3>
   <p>{{content}}</p>
-
+  <p>votes: {{votes}}</p>
   <form action="/questions/{{question_id}}/answers/{{answer_id}}/upvotes" method='POST'>
   </form>
   <button class="btn btn-success btn-xs vote-btn" type='submit' value='Up Vote'>Up Vote</button>

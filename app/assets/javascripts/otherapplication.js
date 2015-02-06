@@ -4,11 +4,31 @@ $(document).ready(function(){
 
 function bindEvents() {
   $('#new-question-form').on("submit", insertQuestion);
-  // console.log("IN bind events");
   $('#new-answer-form').on("submit", insertAnswer);
+
+  $('.question-list').on("click", ".upvote", incrementVote);
 }
 
-//--------------------------Insert Question---------------------------------------------
+//--------------------------Increment Vote--------------------------
+
+function incrementVote(event) {
+  event.preventDefault();
+  var listItem = event.target;
+  var id = $(listItem).attr("id");
+  var form_input = $(this).serialize();
+  $.ajax( {
+    url: this.parentElement.action,
+    type: 'POST',
+    success: function(response) {
+      $("p[id="+response.id+"]").text("votes: " + response.votes);
+    },
+    error: function(response) {
+      console.log(response)
+    }
+  });
+}
+
+//--------------------------Insert Question--------------------------
 
 function insertQuestion(event) {
   event.preventDefault();
@@ -32,11 +52,11 @@ function insertQuestion(event) {
 function buildQuestion(question_obj) {
   var template = $(".append-question").html();
   var newQuestTemplate = Handlebars.compile(template);
-  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": question_obj.title, "content": question_obj.content});
+  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": question_obj.title, "content": question_obj.content, "votes": question_obj.votes});
   return $(resultHTML)
 }
 
-//------------------------Insert Answer------------------------------
+//---------------------------Insert Answer-------------------------
 
 function insertAnswer(event) {
   event.preventDefault();
