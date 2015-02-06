@@ -10,6 +10,7 @@
     <h5><%= answer.title %></h5>
     <p><%= answer.content %></p>
     <%= button_to "Upvote", question_answer_upvotes_path(answer.question, answer), {:class => "btn btn-success btn-xs" }%>
+
      <%= button_to "Downvote", question_answer_downvotes_path(answer.question, answer), {:class => "btn btn-danger btn-xs" } %>
     Votes: <%= answer.votes %>
   <% end %>
@@ -18,7 +19,7 @@
 <br><br><br><br>
 
 <!-- Form for adding answer: -->
-<%= form_for([@question, @question.answers.build ], html: {id: "new-answer-form"}) do |f| %>
+<%= form_for([@question, @question.answers.build], html: {id: "new-answer-form"}) do |f| %>
   <table>
       <tr><%= f.text_field :title, placeholder: "Title", class: "form-control"  %></tr>
       <tr><%= f.text_area :content, placeholder: "Enter Answer...", class: "form-control"   %></tr>
@@ -26,8 +27,18 @@
   </table>
 <% end %>
 
-<div class="append-answer">
-  <h5>insert title here</h5>
-  <p>insert content here</p>
-  <div class="vote-buttons"></div>
+<!-- Answer form template for handlebars -->
+<div class="append-answer" style="display:none">
+  <h3>{{title}}</h3>
+  <p>{{content}}</p>
+  <p id="{{question_id}}">votes: {{votes}}</p>
+  <form action="/questions/{{question_id}}/answers/{{answer_id}}/upvotes" method='POST'>
+  </form>
+  <button class="btn btn-success btn-xs vote-btn" type='submit' value='Up Vote'>Up Vote</button>
+
+  <form action="/questions/{{question_id}}/answers/{{answer_id}}/downvotes" method='POST'>
+  </form>
+  <button class="btn btn-danger btn-xs vote-btn" type='submit' value='Down Vote'>Down Vote</button>
 </div>
+
+

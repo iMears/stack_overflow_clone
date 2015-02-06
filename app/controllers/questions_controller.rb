@@ -9,15 +9,13 @@ class QuestionsController < ApplicationController
   def upvote
     @question = Question.find(params[:question_id])
     @question.increment!(:votes)
-
-    redirect_to questions_path
+    render json: @question
   end
 
   def downvote
     @question = Question.find(params[:question_id])
     @question.decrement!(:votes)
-
-    redirect_to questions_path
+    render json: @question
   end
 
   def index
@@ -30,7 +28,6 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.save
     render json: @question
-    # redirect_to @question
   end
 
   def show

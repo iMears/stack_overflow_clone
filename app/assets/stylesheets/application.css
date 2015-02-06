@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.quote {
+  font-size: 16px;
+}
+
+.page-title {
+  font-family: 'Oxygen', sans-serif;
+}

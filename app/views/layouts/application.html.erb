@@ -2,14 +2,19 @@
 <html>
 <head>
   <title>DbcOverflow</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="jumbotron">
-      <h2 class="text-center">"<%= @api_response %>"</h2>
+     <h1 class="text-center page-title"> <%= image_tag "logo.png" %>stack<strong>overclone</strong></h1>
+      <% if @api_response %>
+        <h2 class="text-center quote">"<%= @api_response %>"</h2>
+      <% end %>
     </div>
   <div class='col-md-4 col-md-offset-4'>
     <%= yield %>
