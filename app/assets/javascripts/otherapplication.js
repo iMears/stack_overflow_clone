@@ -1,11 +1,14 @@
 $(document).ready(function(){
   bindEvents();
+  $('.markdown').keyup(function() {
+    var liveText = $('.markdown').val();
+    $('.live-markdown').html(parseContent(liveText));
+  })
 });
 
 function bindEvents() {
   $('#new-question-form').on("submit", insertQuestion);
   $('#new-answer-form').on("submit", insertAnswer);
-
   $('.question-list').on("click", ".upvote", incrementVote);
   $('.question-list').on("click", ".downvote", decrementVote);
 }
@@ -24,7 +27,7 @@ function incrementVote(event) {
       $("p[id="+response.id+"]").text("votes: " + response.votes);
     },
     error: function(response) {
-      console.log(response)
+      console.log(response);
     }
   });
 }
@@ -43,7 +46,7 @@ function decrementVote(event) {
       $("p[id="+response.id+"]").text("votes: " + response.votes);
     },
     error: function(response) {
-      console.log(response)
+      console.log(response);
     }
   });
 }
@@ -60,20 +63,19 @@ function insertQuestion(event) {
     data: form_input,
     success: function(response) {
       $(".question-list").append(
-          // var parsedContent = parseContent(response);
-          buildQuestion(response, parseContent(response))
-        )
+          buildQuestion(response)
+        );
     },
     error: function(response) {
-      console.log(response)
+      console.log(response);
     }
   });
 }
 
-function buildQuestion(question_obj, parsedContent) {
+function buildQuestion(question_obj) {
   var template = $(".append-question").html();
   var newQuestTemplate = Handlebars.compile(template);
-  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": parsedContent[0], "content": question_obj.content, "votes": question_obj.votes});
+  var resultHTML = newQuestTemplate({"question_id": question_obj.id, "title": question_obj.title, "content": question_obj.content, "votes": question_obj.votes});
   return $(resultHTML);
 }
 
@@ -90,10 +92,10 @@ function insertAnswer(event) {
     success: function(response) {
       $(".answer-list").append(
           buildAnswer(response)
-        )
+        );
     },
     error: function(response) {
-      console.log(response)
+      console.log(response);
     }
   });
 }
@@ -102,25 +104,14 @@ function buildAnswer(answer_obj) {
   var template = $(".append-answer").html();
   var newAnswerTemplate = Handlebars.compile(template);
   var resultHTML = newAnswerTemplate({"question_id": answer_obj.question_id, "answer_id": answer_obj.id, "title": answer_obj.title, "content": answer_obj.content});
-  return $(resultHTML)
+  return $(resultHTML);
 }
 
 //---------------------------Parse Content-------------------------
-function parseContent(contentObject) {
-  var title = contentObject.title;
-  console.log(title)
-  // var content = contentObject.content;
-  // console.log(content)
-
-  //Grab the word with astericks
-  var italString = title.match(/\*[a-z]+\*/);
-  var newTitle = "<strong>" + italString.substring(1,italString.length-1) + "</strong>";
-
-  //remove astericks from string
-  //prepend an open italicize tag to the beginning of the string
-  //append a closing italicize tag to the beginning of the string
-  return [newTitle]
+function parseContent(markdown) {
+  // replace **stuff** with <strong>stuff</strong>
+  // replace *stuff* with <em>stuff</em>
+  markdown = markdown.replace(/\*\*([^*]+)\*\*/, "<strong>$1</strong>");
+  return markdown;
 }
-
-
 
