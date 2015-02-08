@@ -1,0 +1,17 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.vote-count {
+  font-size: 24px;
+  margin: 0;
+  margin-left: 25px;
+}

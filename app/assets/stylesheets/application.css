@@ -10,14 +10,12 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require base/normalize
+ *= require base/layout
+ *= require base/typography
+ *= require components/buttons
+ *= require components/forms
+ *= require modules/header
+ *= require base/media_queries
  */
-
-.quote {
-  font-size: 16px;
-}
-
-.page-title {
-  font-family: 'Oxygen', sans-serif;
-}

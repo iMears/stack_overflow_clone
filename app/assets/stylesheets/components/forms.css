@@ -1,0 +1,12 @@
+.form-group {
+  /*background-color: red;*/
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+}
+
+.form-control {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}

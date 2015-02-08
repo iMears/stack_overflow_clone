@@ -1,11 +1,13 @@
 <div class="question-list">
   <% @questions.each do |question| %>
+    <div class="each-question">
     <h3><%= link_to question.title, question_path(question) %></h3>
     <p><%= question.content %></p>
-    <%= button_to "Up Vote", question_upvotes_path(question), {:class => "btn btn-success btn-xs vote-btn upvote" }%>
-    <%= button_to "Down Vote", question_downvotes_path(question), {:class => "btn btn-danger btn-xs vote-btn downvote" }%>
-    Votes: <%= question.votes %>
+    <%= button_to "Up Vote", question_upvotes_path(question), {:class => "btn upvote" }%>
+    <p class="vote-count"><%= question.votes %></p>
+    <%= button_to "Down Vote", question_downvotes_path(question), {:class => "btn downvote" }%>
     <br><br>
+  </div>
   <% end %>
 </div>
 
@@ -15,11 +17,11 @@
   <p>{{content}}</p>
 
   <form id="up-{{question_id}}" action="/questions/{{question_id}}/upvotes" method='POST'>
-    <button class="btn btn-success btn-xs upvote" type='submit' value='Up Vote'>Up Vote</button>
+    <button class="btn" type='submit' value='Up Vote'>Up Vote</button>
   </form>
 
   <form id="down-{{question_id}}" action="/questions/{{question_id}}/downvotes" method='POST'>
-    <button class="btn btn-danger btn-xs downvote" type='submit' value='Down Vote'>Down Vote</button>
+    <button class="btn" type='submit' value='Down Vote'>Down Vote</button>
   </form>
 
   <p id="{{question_id}}">votes: {{votes}}</p>
@@ -29,8 +31,8 @@
 <table>
   <%= form_for :question, html: {id: "new-question-form"} do |f| %>
     <tr><%= f.text_field :title, placeholder: "Title", class: "form-control" %></tr>
-    <tr><%= f.text_area :content, placeholder: "Enter text...", class: "form-control markdown" %></tr>
-    <td><%= f.submit "Add Question" , class: "btn btn-primary" %></td>
+    <tr><%= f.text_area :content, placeholder: "Enter text...", class: "form-control" %></tr>
+    <tr><%= f.submit "Add Question" , class: "btn form-control" %></tr>
   <% end %>
 </table>
 

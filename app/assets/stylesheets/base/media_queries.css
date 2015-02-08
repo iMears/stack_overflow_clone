@@ -1,0 +1,8 @@
+@media only screen
+and (max-width : 780px) {
+  .question-list {
+    width: 100%;
+    margin: 30px;
+  }
+}
+

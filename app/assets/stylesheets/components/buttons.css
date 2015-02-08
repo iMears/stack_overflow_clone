@@ -1,0 +1,21 @@
+.btn {
+  border-radius: 7px;
+  color: white;
+  padding: 4px;
+  font-size: 12px;
+  min-width: 100px;
+}
+
+.btn:hover {
+  opacity: .3;
+}
+
+.upvote {
+  min-width: 80px;
+  background-color: #549431;
+}
+
+.downvote {
+  min-width: 80px;
+  background-color: #EF0000;
+}

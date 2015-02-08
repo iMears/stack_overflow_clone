@@ -1,0 +1,9 @@
+.question-list {
+  margin: 0 auto;
+  width: 30%;
+}
+
+.each-question {
+  box-shadow: 5px 5px 10px #d3d3d3;
+  border-radius: 5px;
+}
