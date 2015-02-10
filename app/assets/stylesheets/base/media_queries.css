@@ -4,5 +4,9 @@ and (max-width : 780px) {
     width: 100%;
     margin: 30px;
   }
+
+  .form-group {
+    width: 100%;
+  }
 }
 

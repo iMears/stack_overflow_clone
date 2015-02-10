@@ -20,10 +20,13 @@ function incrementVote(event) {
   var listItem = event.target;
   var id = $(listItem).attr("id");
   var form_input = $(this).serialize();
+  debugger;
   $.ajax( {
     url: this.parentElement.action,
     type: 'POST',
     success: function(response) {
+      console.log("_________________________________")
+      console.log(response)
       $("p[id="+response.id+"]").text("votes: " + response.votes);
     },
     error: function(response) {
